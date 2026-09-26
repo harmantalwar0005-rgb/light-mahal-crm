@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827"><link rel="manifest" href="manifest.json"><title>Light Mahal CRM</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Arial;background:#f3f4f6;color:#111827}
+header{background:#111827;color:#fff;padding:16px;position:sticky;top:0;z-index:10}.head{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}.brand{font-size:21px;font-weight:800}.tag{font-size:11px;color:#cbd5e1}
+main{max-width:1100px;margin:auto;padding:14px 14px 90px}.nav{display:flex;gap:7px;overflow:auto;margin-bottom:14px}.nav button{white-space:nowrap}
+button{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer;background:#e5e7eb;color:#111827}.primary{background:#2563eb;color:#fff}.danger{background:#fee2e2;color:#991b1b}.dark{background:#111827;color:#fff}
+.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px}.num{font-size:24px;font-weight:800;margin-top:5px}.muted{font-size:12px;color:#6b7280}
+.panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin-top:12px}.form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;font-weight:700}input,select{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:9px;background:#fff;font-size:14px}.wide{grid-column:1/-1}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:180px}.table{overflow:auto;margin-top:10px}table{border-collapse:collapse;width:100%;min-width:850px}th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:13px}th{background:#f9fafb}
+.link{color:#2563eb;text-decoration:none;font-weight:700}.pill{display:inline-block;padding:4px 7px;background:#eef2ff;color:#3730a3;border-radius:99px;font-size:11px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.form{grid-template-columns:1fr}.head{align-items:flex-start}.cards{grid-template-columns:1fr 1fr}}
+</style></head>
+<body>
+<header><div class="head"><div><div class="brand">💡 Light Mahal</div><div class="tag">Customer • Electrician • Architect CRM</div></div><button class="dark" onclick="installApp()">Install App</button></div></header>
+<main>
+<div class="nav">
+<button class="primary" data-page="dashboard">Dashboard</button><button data-page="customers">Customers</button><button data-page="electricians">Electricians</button><button data-page="architects">Architects</button><button data-page="connections">Coordination</button>
+</div>
+
+<section id="dashboard" class="page active">
+<div class="cards" id="stats"></div>
+<div class="panel"><b>Monthly Report</b><div class="toolbar" style="margin-top:10px"><input type="month" id="month"></div><div id="report" style="margin-top:10px"></div></div>
+<div class="panel"><b>Quick actions</b><div class="toolbar" style="margin-top:10px"><button class="primary" onclick="go('customers')">+ Customer</button><button onclick="go('electricians')">+ Electrician</button><button onclick="go('architects')">+ Architect</button></div></div>
+</section>
+
+<section id="customers" class="page">
+<div class="panel"><b>Add Customer</b><form id="customerForm" class="form" style="margin-top:10px">
+<div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone</label><input name="phone" inputmode="tel"></div><div class="field"><label>Location</label><input name="location"></div>
+<div class="field"><label>Purchased</label><input name="purchased"></div><div class="field"><label>Interested</label><input name="interested"></div><div class="field"><label>Price ₹</label><input name="price" type="number" min="0"></div>
+<div class="field"><label>Date of Purchase</label><input name="date" type="date"></div><div><button class="primary" style="margin-top:22px">Save Customer</button></div></form></div>
+<div class="panel"><div class="toolbar"><input id="cs" placeholder="Search customers..."></div><div class="table" id="ct"></div></div>
+</section>
+
+<section id="electricians" class="page">
+<div class="panel"><b>Add Electrician</b><form id="electricianForm" class="form" style="margin-top:10px">
+<div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone</label><input name="phone" inputmode="tel"></div><div class="field"><label>Date of Joining</label><input name="joining" type="date"></div>
+<div class="field"><label>Purchased</label><input name="purchased"></div><div class="field"><label>Site Name</label><input name="site"></div><div class="field"><label>Price ₹</label><input name="price" type="number" min="0"></div>
+<div><button class="primary" style="margin-top:22px">Save Electrician</button></div></form></div>
+<div class="panel"><div class="toolbar"><input id="es" placeholder="Search electricians..."></div><div class="table" id="et"></div></div>
+</section>
+
+<section id="architects" class="page">
+<div class="panel"><b>Add Architect</b><form id="architectForm" class="form" style="margin-top:10px">
+<div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone</label><input name="phone" inputmode="tel"></div><div class="field"><label>Date of Joining</label><input name="joining" type="date"></div>
+<div class="field"><label>Purchased</label><input name="purchased"></div><div class="field"><label>Site Name</label><input name="site"></div><div class="field"><label>Price ₹</label><input name="price" type="number" min="0"></div>
+<div><button class="primary" style="margin-top:22px">Save Architect</button></div></form></div>
+<div class="panel"><div class="toolbar"><input id="as" placeholder="Search architects..."></div><div class="table" id="at"></div></div>
+</section>
+
+<section id="connections" class="page">
+<div class="panel"><b>Coordinate People</b><p class="muted">Create a site/project connection between a customer, electrician and architect. The connection is searchable by site name.</p>
+<form id="connectionForm" class="form">
+<div class="field"><label>Site / Project Name</label><input name="site" required></div>
+<div class="field"><label>Customer</label><select name="customer" id="customerSelect"></select></div>
+<div class="field"><label>Electrician</label><select name="electrician" id="electricianSelect"></select></div>
+<div class="field"><label>Architect</label><select name="architect" id="architectSelect"></select></div>
+<div class="field"><label>Project Price ₹</label><input name="price" type="number" min="0"></div>
+<div class="field"><label>Status</label><select name="status"><option>Lead</option><option>Interested</option><option>In Progress</option><option>Completed</option><option>Follow-up</option></select></div>
+<div class="wide"><button class="primary">Save Connection</button></div>
+</form></div>
+<div class="panel"><div class="toolbar"><input id="ks" placeholder="Search site/project..."></div><div class="table" id="kt"></div></div>
+</section>
+</main>
+
+<script>
+const K='LMCRM_FULL_V1'; let db=JSON.parse(localStorage.getItem(K)||'{"customers":[],"electricians":[],"architects":[],"connections":[]}');
+let deferredPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
+const $=id=>document.getElementById(id), money=n=>'₹'+Number(n||0).toLocaleString('en-IN');
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function persist(){localStorage.setItem(K,JSON.stringify(db));render()}
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(p).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('primary',x.dataset.page===p));render()}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function add(type,form){let x=Object.fromEntries(new FormData(form));x.id=crypto.randomUUID();x.price=Number(x.price||0);db[type].push(x);form.reset();persist()}
+function del(type,id){if(confirm('Delete this record?')){db[type]=db[type].filter(x=>x.id!==id);persist()}}
+function filtered(type,input){let q=(input||'').toLowerCase();return db[type].filter(x=>Object.values(x).join(' ').toLowerCase().includes(q))}
+function peopleTable(type,elId,searchId,cols){
+ let a=filtered(type,$(searchId).value); let html='<table><tr>'+cols.map(c=>'<th>'+c[0]+'</th>').join('')+'<th>Action</th></tr>';
+ a.forEach(x=>{html+='<tr>'+cols.map(c=>'<td>'+ (c[0]==='Phone'&&x[c[1]]?'<a class="link" href="tel:'+esc(x[c[1]])+'">'+esc(x[c[1]])+'</a>':esc(x[c[1]]))+'</td>').join('')+'<td><button class="danger" onclick="del(\''+type+'\',\''+x.id+'\')">Delete</button></td></tr>'});html+='</table>';$(elId).innerHTML=html}
+function render(){
+ $('stats').innerHTML=[['Customers',db.customers.length],['Electricians',db.electricians.length],['Architects',db.architects.length],['Projects',db.connections.length]].map(x=>'<div class="card"><div class="muted">'+x[0]+'</div><div class="num">'+x[1]+'</div></div>').join('');
+ peopleTable('customers','ct','cs',[['Name','name'],['Phone','phone'],['Location','location'],['Purchased','purchased'],['Interested','interested'],['Price','price'],['Date','date']]);
+ peopleTable('electricians','et','es',[['Name','name'],['Phone','phone'],['Joining','joining'],['Purchased','purchased'],['Site','site'],['Price','price']]);
+ peopleTable('architects','at','as',[['Name','name'],['Phone','phone'],['Joining','joining'],['Purchased','purchased'],['Site','site'],['Price','price']]);
+ selects(); connections(); report()
+}
+function selects(){[['customerSelect','customers'],['electricianSelect','electricians'],['architectSelect','architects']].forEach(([id,t])=>$(id).innerHTML='<option value="">— Select —</option>'+db[t].map(x=>'<option value="'+x.id+'">'+esc(x.name)+' '+(x.phone?'('+esc(x.phone)+')':'')+'</option>').join(''))}
+function pname(type,id){let x=db[type].find(y=>y.id===id);return x?x.name:'—'}
+function connections(){let q=$('ks').value.toLowerCase(),a=db.connections.filter(x=>Object.values(x).join(' ').toLowerCase().includes(q));$('kt').innerHTML='<table><tr><th>Site</th><th>Customer</th><th>Electrician</th><th>Architect</th><th>Price</th><th>Status</th><th></th></tr>'+a.map(x=>'<tr><td><b>'+esc(x.site)+'</b></td><td>'+esc(pname('customers',x.customer))+'</td><td>'+esc(pname('electricians',x.electrician))+'</td><td>'+esc(pname('architects',x.architect))+'</td><td>'+money(x.price)+'</td><td><span class="pill">'+esc(x.status)+'</span></td><td><button class="danger" onclick="del(\'connections\',\''+x.id+'\')">Delete</button></td></tr>').join('')+'</table>'}
+function report(){let m=$('month').value||new Date().toISOString().slice(0,7),cs=db.customers.filter(x=>(x.date||'').slice(0,7)===m),es=db.electricians.filter(x=>(x.joining||'').slice(0,7)===m),as=db.architects.filter(x=>(x.joining||'').slice(0,7)===m),ks=db.connections.filter(x=>String(x.createdAt||'').slice(0,7)===m);$('report').innerHTML='<div class="cards"><div class="card"><b>Customers</b><br>'+cs.length+' • '+money(cs.reduce((s,x)=>s+x.price,0))+'</div><div class="card"><b>Electricians</b><br>'+es.length+' • '+money(es.reduce((s,x)=>s+x.price,0))+'</div><div class="card"><b>Architects</b><br>'+as.length+' • '+money(as.reduce((s,x)=>s+x.price,0))+'</div><div class="card"><b>Projects</b><br>'+ks.length+' • '+money(ks.reduce((s,x)=>s+x.price,0))+'</div></div>'}
+$('customerForm').onsubmit=e=>{e.preventDefault();add('customers',e.target)};$('electricianForm').onsubmit=e=>{e.preventDefault();add('electricians',e.target)};$('architectForm').onsubmit=e=>{e.preventDefault();add('architects',e.target)};
+$('connectionForm').onsubmit=e=>{e.preventDefault();let x=Object.fromEntries(new FormData(e.target));x.id=crypto.randomUUID();x.price=Number(x.price||0);x.createdAt=new Date().toISOString();db.connections.push(x);e.target.reset();persist()};
+['cs','es','as','ks','month'].forEach(id=>$(id).addEventListener('input',render));$('month').value=new Date().toISOString().slice(0,7);
+async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}else alert('On iPhone: open this app in Safari, tap Share → Add to Home Screen.')}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+render();
+</script></body></html>
