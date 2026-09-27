@@ -232,5 +232,36 @@ $('authForm').onsubmit=async e=>{
 async function logout(){await sb.auth.signOut();$('authGate').style.display='flex'}
 initAuth().catch(e=>{console.error(e);$('authError').textContent='Unable to initialize login. Please refresh.';$('authError').style.display='block';$('authGate').style.display='flex'});
 </script>
+ <!-- Logout Button -->
+<div style="position:fixed;right:20px;bottom:20px;z-index:9999">
+  <button onclick="logoutCRM()" style="
+    background:#111827;
+    color:white;
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+  ">
+    🚪 Logout
+  </button>
+</div>
+
+<script>
+async function logoutCRM(){
+  try {
+    if (window.supabaseClient) {
+      await window.supabaseClient.auth.signOut();
+    }
+    localStorage.clear();
+    sessionStorage.clear();
+    location.reload();
+  } catch(e) {
+    console.error(e);
+    location.reload();
+  }
+}
+</script>
 </body>
 </html>
