@@ -10,7 +10,7 @@
 .authGate{position:fixed;inset:0;background:linear-gradient(135deg,#111827 0%,#1f2937 55%,#f59e0b 140%);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}.authBox{width:min(420px,100%);background:#fff;border-radius:22px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.authLogo{display:flex;align-items:center;gap:12px;margin-bottom:24px}.authLogoIcon{width:48px;height:48px;border-radius:14px;background:#f59e0b;display:grid;place-items:center;font-size:25px}.authTitle{font-size:24px;font-weight:900}.authSub{font-size:12px;color:#6b7280;margin-top:3px}.authBox h2{margin:0 0 6px;font-size:22px}.authHint{font-size:13px;color:#6b7280;margin:0 0 18px}.authField{margin:12px 0}.authField label{display:block;font-size:12px;font-weight:750;margin-bottom:6px}.authField input{width:100%;padding:12px 13px;border:1px solid #d1d5db;border-radius:11px;outline:none}.authField input:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.15)}.authBtn{width:100%;margin-top:8px;padding:12px;background:#111827;color:#fff;border-radius:11px;font-weight:800}.authError{display:none;background:#fee2e2;color:#991b1b;padding:10px 12px;border-radius:10px;font-size:12px;margin:12px 0}.authLoading{display:none;text-align:center;font-size:12px;color:#6b7280;margin-top:10px}.logoutBtn{font-size:11px!important;padding:7px 10px!important}.roleBadge{font-size:11px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:800}.userName{font-size:12px;color:#4b5563;font-weight:700}
 </style>
 </head>
-<body><div class="authGate" id="authGate"><div class="authBox"><div class="authLogo"><div class="authLogoIcon">💡</div><div><div class="authTitle">Light Mahal</div><div class="authSub">Secure CRM • Admin Login</div></div></div><h2>Sign in</h2><p class="authHint">Use your Light Mahal CRM account to continue.</p><div class="authError" id="authError"></div><form id="authForm"><div class="authField"><label>Email</label><input id="authEmail" type="email" autocomplete="username" required></div><div class="authField"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div><button class="authBtn" id="authBtn">Sign in</button><div class="authLoading" id="authLoading">Signing in…</div></form></div></div><div class="app"><aside class="sidebar" id="sidebar"><div class="logo"><div class="logoIcon">💡</div><div><div class="logoTitle">Light Mahal</div><div class="logoSub">CRM • CLOUD BUSINESS APP</div></div></div><div class="sideLabel">Workspace</div><nav class="sideNav"><button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="customers">👥 &nbsp; Customers</button><button data-page="leads">🎯 &nbsp; Leads & Enquiries</button><button data-page="electricians">⚡ &nbsp; Electricians</button><button data-page="architects">🏛️ &nbsp; Architects</button><button data-page="projects">🏗️ &nbsp; Projects / Sites</button><button data-page="products">📦 &nbsp; Products & Stock</button><button data-page="sales">💰 &nbsp; Sales</button><button data-page="payments">💳 &nbsp; Payments</button><button data-page="tasks">📅 &nbsp; Follow-ups</button><button data-page="team">👤 &nbsp; Team & Roles</button></nav><div class="sideBottom"><div class="cloudMini" id="sideCloud">☁ Checking cloud…</div><button id="sideTeamQuick" onclick="go('team')" style="width:100%;margin-bottom:8px;display:none">👤 Team &amp; Roles</button><button onclick="showSettings()" style="width:100%">⚙ Settings</button></div></aside><div class="main"><header class="topbar"><div class="welcome"><div style="display:flex;align-items:center;gap:9px"><button class="mobileMenu" onclick="toggleSidebar()">☰</button><h1 id="topTitle">Dashboard</h1></div><p>Manage your lighting business from one place.</p></div><div class="topActions"><span id="cloudState" class="cloud">Local mode</span><span id="userName" class="userName"></span><span id="roleBadge" class="roleBadge">Role: —</span><button onclick="showSettings()">⚙</button><button class="logoutBtn" onclick="logout()">Logout</button></div></header><main class="content"><section id="dashboard" class="page active">
+<body><div class="authGate" id="authGate"><div class="authBox"><div class="authLogo"><div class="authLogoIcon">💡</div><div><div class="authTitle">Light Mahal</div><div class="authSub">Secure CRM • Admin Login</div></div></div><h2>Sign in</h2><p class="authHint">Use your Light Mahal CRM account to continue.</p><div class="authError" id="authError"></div><form id="authForm"><div class="authField"><label>Login ID or Email</label><input id="authEmail" type="text" autocomplete="username" placeholder="e.g. manager or your email" required></div><div class="authField"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div><button class="authBtn" id="authBtn">Sign in</button><div class="authLoading" id="authLoading">Signing in…</div></form></div></div><div class="app"><aside class="sidebar" id="sidebar"><div class="logo"><div class="logoIcon">💡</div><div><div class="logoTitle">Light Mahal</div><div class="logoSub">CRM • CLOUD BUSINESS APP</div></div></div><div class="sideLabel">Workspace</div><nav class="sideNav"><button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="customers">👥 &nbsp; Customers</button><button data-page="leads">🎯 &nbsp; Leads & Enquiries</button><button data-page="electricians">⚡ &nbsp; Electricians</button><button data-page="architects">🏛️ &nbsp; Architects</button><button data-page="projects">🏗️ &nbsp; Projects / Sites</button><button data-page="products">📦 &nbsp; Products & Stock</button><button data-page="sales">💰 &nbsp; Sales</button><button data-page="payments">💳 &nbsp; Payments</button><button data-page="tasks">📅 &nbsp; Follow-ups</button><button data-page="team">👤 &nbsp; Team & Roles</button></nav><div class="sideBottom"><div class="cloudMini" id="sideCloud">☁ Checking cloud…</div><button id="sideTeamQuick" onclick="go('team')" style="width:100%;margin-bottom:8px;display:none">👤 Team &amp; Roles</button><button onclick="showSettings()" style="width:100%">⚙ Settings</button></div></aside><div class="main"><header class="topbar"><div class="welcome"><div style="display:flex;align-items:center;gap:9px"><button class="mobileMenu" onclick="toggleSidebar()">☰</button><h1 id="topTitle">Dashboard</h1></div><p>Manage your lighting business from one place.</p></div><div class="topActions"><span id="cloudState" class="cloud">Local mode</span><span id="userName" class="userName"></span><span id="roleBadge" class="roleBadge">Role: —</span><button onclick="showSettings()">⚙</button><button class="logoutBtn" onclick="logout()">Logout</button></div></header><main class="content"><section id="dashboard" class="page active">
 <div class="cards" id="stats"></div>
 <div class="panel"><b>Quick actions</b><div class="toolbar" style="margin-top:10px">
 <button class="primary" onclick="go('customers')">+ Customer</button><button onclick="go('leads')">+ Lead</button>
@@ -98,10 +98,10 @@
 </div>
 <div class="panel">
 <b>Create new CRM login</b>
-<p class="muted">Admin only. The account is created securely in Supabase Authentication. The password is never stored in this CRM page.</p>
+<p class="muted">Admin only. Give each team member a simple Login ID and password. The account is created securely in Supabase Authentication.</p>
 <form id="teamCreateForm" class="form" style="margin-top:12px">
 <div class="field"><label>Full Name</label><input name="full_name" required></div>
-<div class="field"><label>Email</label><input name="email" type="email" required></div>
+<div class="field"><label>Login ID</label><input name="username" pattern="[A-Za-z0-9._-]{3,30}" placeholder="e.g. manager" required></div>
 <div class="field"><label>Temporary Password</label><input name="password" type="password" minlength="6" required></div>
 <div class="field"><label>CRM Role</label><select name="role"><option value="staff">Staff</option><option value="manager">Manager</option><option value="admin">Admin</option></select></div>
 <div><button class="primary" style="margin-top:22px" type="submit">Create Team Member</button></div>
@@ -202,6 +202,9 @@ async function createTeamUser(form){
  if(currentRole!=='admin'){toast('Only Admin can create team accounts');return}
  if(!sb||!currentUser){toast('Cloud is not connected');return}
  const data=Object.fromEntries(new FormData(form));
+ const username=String(data.username||'').trim().toLowerCase();
+ if(!/^[a-z0-9._-]{3,30}$/.test(username)){ $('teamCreateMsg').textContent='Login ID must be 3–30 characters using letters, numbers, dot, underscore or hyphen.'; return }
+ const internalEmail=username+'@lightmahal.local';
  const msg=$('teamCreateMsg');
  msg.textContent='Creating account…';
  try{
@@ -211,7 +214,7 @@ async function createTeamUser(form){
    const response=await fetch(DEFAULT_SB_URL+'/functions/v1/create-team-user',{
      method:'POST',
      headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken},
-     body:JSON.stringify({full_name:data.full_name,email:data.email,password:data.password,role:data.role})
+     body:JSON.stringify({full_name:data.full_name,email:internalEmail,password:data.password,role:data.role})
    });
    const result=await response.json().catch(()=>({}));
    if(!response.ok) throw new Error(result.error||'Unable to create account');
@@ -220,7 +223,7 @@ async function createTeamUser(form){
      if(roleError) throw roleError;
    }
    form.reset();
-   msg.textContent='Account created successfully. The team member can now sign in with the email and temporary password.';
+   msg.textContent='Account created successfully. Login ID: '+username+' • The team member can sign in with this ID and the temporary password.';
    toast('Team member created');
    await loadTeam();
  }catch(e){
@@ -359,7 +362,8 @@ async function enterApp(session){
 }
 $('authForm').onsubmit=async e=>{
  e.preventDefault();
- const email=$('authEmail').value.trim(),password=$('authPassword').value;
+ const login=$('authEmail').value.trim().toLowerCase(),password=$('authPassword').value;
+ const email=login.includes('@')?login:(login+'@lightmahal.local');
  $('authError').style.display='none';$('authLoading').style.display='block';$('authBtn').disabled=true;
  try{
    const {error}=await sb.auth.signInWithPassword({email,password});
