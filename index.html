@@ -313,29 +313,40 @@ function clearLocal(){if(confirm('Clear all local CRM data? Export a backup firs
 $('teamCreateForm').onsubmit=createTeamUser;
 const DEFAULT_SB_URL='https://yvadfnkyfygnuyrwxsuh.supabase.co';
 const DEFAULT_SB_KEY='sb_publishable_NltJI9fL0eUglga9a-E0oQ_suXzxV5B';
+let appStarted=false;
+let loadingApp=false;
 async function initAuth(){
  const u=localStorage.getItem('LM_SB_URL')||DEFAULT_SB_URL;
  const k=localStorage.getItem('LM_SB_KEY')||DEFAULT_SB_KEY;
  $('sbUrl').value=u;$('sbKey').value=k;
- sb=window.supabase.createClient(u,k);
+ sb=window.supabase.createClient(u,k,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
  const {data:{session}}=await sb.auth.getSession();
- if(session){await enterApp(session)}else{$('authGate').style.display='flex'}
- sb.auth.onAuthStateChange(async (_event,session)=>{if(session){await enterApp(session)}else{$('authGate').style.display='flex'}});
+ if(session) await enterApp(session); else $('authGate').style.display='flex';
+ sb.auth.onAuthStateChange((event,session)=>{
+   if(event==='SIGNED_IN' && session) { setTimeout(()=>enterApp(session),0); }
+   else if(event==='SIGNED_OUT'){ appStarted=false; $('authGate').style.display='flex'; }
+ });
 }
 async function enterApp(session){
+ if(loadingApp || appStarted) return;
+ loadingApp=true;
  try{
    await loadCurrentProfile(session);
    $('authGate').style.display='none';
-   await connectCloud();
+   cloud=true;
+   $('cloudState').textContent='Cloud connected';$('sideCloud').textContent='☁ Cloud connected';$('cloudState').className='cloud ok';
+   await loadCloud();
    applyRolePermissions();
    render();
+   appStarted=true;
  }catch(e){
    console.error(e);
    $('authGate').style.display='flex';
    $('authError').textContent=e.message||'Unable to load your CRM account.';
    $('authError').style.display='block';
-   if(sb) await sb.auth.signOut();
- }
+   cloud=false;
+   await sb.auth.signOut();
+ }finally{loadingApp=false}
 }
 $('authForm').onsubmit=async e=>{
  e.preventDefault();
