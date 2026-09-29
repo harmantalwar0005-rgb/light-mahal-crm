@@ -1,68 +1,58 @@
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
 <!doctype html>
-$('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);db={...empty,...x};save();render();toast('Backup imported')}catch(_){toast('Invalid backup')}};r.readAsText(f)}
-function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='light-mahal-crm-backup-'+today()+'.json';a.click()}
-function clearLocal(){if(confirm('Clear all local CRM data? Export a backup first.')){db=JSON.parse(JSON.stringify(empty));save();render();toast('Local data cleared')}}
-$('teamCreateForm').onsubmit=createTeamUser;
-const DEFAULT_SB_URL='https://yvadfnkyfygnuyrwxsuh.supabase.co';
-const DEFAULT_SB_KEY='sb_publishable_NltJI9fL0eUglga9a-E0oQ_suXzxV5B';
 let appStarted=false;
 let loadingApp=false;
 async function initAuth(){
@@ -112,5 +102,7 @@ $('authForm').onsubmit=async e=>{
 async function logout(){currentUser=null;currentProfile=null;currentRole=null;await sb.auth.signOut();$('authGate').style.display='flex'}
 initAuth().catch(e=>{console.error(e);$('authError').textContent='Unable to initialize login. Please refresh.';$('authError').style.display='block';$('authGate').style.display='flex'});
 </script>
+
+<div id="customerPrintArea" class="customerPrintArea"></div>
 </body>
 </html>
