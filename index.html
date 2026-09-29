@@ -42,7 +42,7 @@ body.staffMode .staffHistoryNote{display:block!important}
 <section id="customers" class="page"><div class="pageTitle"><div><h2>Customers</h2><p>Manage customer contacts, purchases and enquiries.</p></div></div>
 <div class="panel"><b>Add Customer</b><form id="customerForm" class="form" style="margin-top:10px">
 <div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone</label><input name="phone" inputmode="tel"></div><div class="field"><label>Location</label><input name="location"></div>
-<div class="field"><label>Purchased</label><input name="purchased"></div><div class="field"><label>Interested</label><input name="interested"></div><div class="field"><label>Value ₹</label><input name="price" type="number" min="0"></div>
+<div class="field"><label>Purchased</label><input name="purchased"></div><div class="field"><label>Interested In</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px"><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Leaf"> Leaf</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Jhoomer"> Jhoomer</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Hanging"> Hanging</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Profile Light"> Profile Light</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Fancy Light"> Fancy Light</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Rope Light"> Rope Light</label><label style="font-weight:400"><input type="checkbox" name="interestItem" value="Customize" onchange="toggleCustomerCustomInterest(this)"> Customize</label></div><input id="customerCustomInterest" name="customInterest" placeholder="Enter customized interest" style="display:none;margin-top:8px"></div><div class="field"><label>Value ₹</label><input name="price" type="number" min="0"> </div>
 <div class="field"><label>Purchase Date</label><input name="date" type="date"></div><div class="field"><label>Notes</label><input name="notes"></div>
 <div><button class="primary" style="margin-top:22px">Save Customer</button></div></form></div>
 <div class="panel historyPanel"><div class="toolbar"><input id="cs" placeholder="Search customers..."></div><div class="table" id="ct"></div></div><div class="staffHistoryNote">Staff can add customers. Existing customer history is restricted.</div>
@@ -281,10 +281,25 @@ async function loadCloud(){
  save();
 } 
 async function cloudInsert(table,row){if(!cloud)return;const {error}=await sb.from(table).upsert(row,{onConflict:'id'});if(error)throw new Error(table+': '+error.message)}
+function toggleCustomerCustomInterest(box){
+ const input=document.getElementById('customerCustomInterest');
+ if(input) input.style.display=box.checked?'block':'none';
+ if(!box.checked && input) input.value='';
+}
 async function add(type,form){
- let x=Object.fromEntries(new FormData(form));x.id=uid();x.created_at=new Date().toISOString();
+ let x=Object.fromEntries(new FormData(form));
+ if(type==='customers'){
+   const selected=[...form.querySelectorAll('input[name="interestItem"]:checked')].map(el=>el.value).filter(v=>v!=='Customize');
+   const custom=form.customInterest?.value.trim();
+   if(form.querySelector('input[name="interestItem"][value="Customize"]')?.checked && custom) selected.push(custom);
+   x.interested=selected.join(', ');
+   delete x.interestItem; delete x.customInterest;
+ }
+ x.id=uid();x.created_at=new Date().toISOString();
  for(const k of ['price','value','amount','buy','sell','stock','low','qty','unit','discount']) if(k in x)x[k]=Number(x[k]||0);
- db[type].push(x);save();await cloudInsert(type,x);form.reset();toast('Saved');render()
+ db[type].push(x);save();await cloudInsert(type,x);form.reset();
+ const ci=document.getElementById('customerCustomInterest');if(ci)ci.style.display='none';
+ toast('Saved');render()
 }
 async function del(type,id){if(!confirm('Delete this record?'))return;db[type]=db[type].filter(x=>x.id!==id);save();if(cloud)await sb.from(type).delete().eq('id',id);render()}
 function filt(type,id){let q=($(id)?.value||'').toLowerCase();return db[type].filter(x=>Object.values(x).join(' ').toLowerCase().includes(q))}
