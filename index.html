@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#111827">
 <title>Light Mahal CRM v2</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>*{box-sizing:border-box}:root{--bg:#f6f7fb;--surface:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--dark:#111827;--brand:#f59e0b;--shadow:0 8px 28px rgba(15,23,42,.07)}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{border:0;border-radius:10px;padding:10px 13px;font-weight:750;cursor:pointer;background:#eef0f4;color:var(--text)}.primary{background:var(--dark);color:#fff}.danger{background:#fee2e2;color:#991b1b}.app{min-height:100vh}.sidebar{width:245px;overflow-y:auto;background:#111827;color:#fff;position:fixed;inset:0 auto 0 0;padding:18px 12px;z-index:30;display:flex;flex-direction:column}.logo{display:flex;align-items:center;gap:10px;padding:4px 9px 22px}.logoIcon{width:40px;height:40px;border-radius:12px;background:var(--brand);display:grid;place-items:center;font-size:22px}.logoTitle{font-size:17px;font-weight:850}.logoSub{font-size:10px;color:#9ca3af}.sideLabel{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#6b7280;padding:8px 11px}.sideNav{display:flex;flex-direction:column;gap:4px;flex:1;min-height:0;overflow-y:auto}.sideNav button{background:transparent;color:#cbd5e1;text-align:left;padding:10px 11px}.sideNav button:hover,.sideNav button.active{background:#263044;color:#fff}.sideNav button.active{box-shadow:inset 3px 0 var(--brand)}.sideNav button[data-page="team"]{display:none!important}.sideBottom{margin-top:12px;flex-shrink:0;padding:12px 9px;border-top:1px solid #263044}.cloudMini{font-size:11px;color:#9ca3af;margin-bottom:9px}.main{margin-left:245px;min-height:100vh}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}.welcome h1{font-size:20px;margin:0}.welcome p{font-size:12px;color:var(--muted);margin:4px 0 0}.topActions{display:flex;gap:8px;align-items:center}.cloud{font-size:11px;padding:6px 9px;border-radius:999px;background:#fee2e2;color:#991b1b}.cloud.ok{background:#dcfce7;color:#166534}.content{padding:24px;max-width:1500px;margin:auto}.page{display:none}.page.active{display:block}.pageTitle{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.pageTitle h2{margin:0;font-size:24px}.pageTitle p{margin:5px 0 0;color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.panel{margin-top:14px}.muted{font-size:12px;color:var(--muted)}.num{font-size:25px;font-weight:850;margin-top:5px}.form{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;font-weight:750}input,select,textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:9px;background:#fff;font-size:14px}.wide{grid-column:1/-1}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:200px}.table{overflow:auto;margin-top:10px}table{border-collapse:collapse;width:100%;min-width:850px}th,td{padding:11px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}th{background:#f9fafb;color:#4b5563;font-size:11px}.link{color:#2563eb;text-decoration:none;font-weight:700}.status{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:11px}.toast{position:fixed;right:18px;bottom:18px;background:#111827;color:#fff;padding:12px 15px;border-radius:10px;display:none;z-index:50;max-width:380px}.empty{padding:30px;text-align:center;color:#6b7280}.quickGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.quickGrid button{background:#f9fafb;border:1px solid var(--border);text-align:left}.quickGrid b{display:block;font-size:12px}.quickGrid span{font-size:11px;color:var(--muted)}.mobileMenu{display:none}@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.quickGrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.sidebar{transform:translateX(-100%);transition:.2s}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mobileMenu{display:inline-flex}.topbar{padding:0 16px}.content{padding:16px}.form{grid-template-columns:1fr 1fr}}@media(max-width:520px){.form{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.pageTitle{align-items:flex-start;flex-direction:column}.topbar{height:66px}.welcome h1{font-size:17px}.welcome p{display:none}.topActions .cloud{display:none}.quickGrid{grid-template-columns:1fr 1fr}}
+<style>*{box-sizing:border-box}:root{--bg:#f6f7fb;--surface:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--dark:#111827;--brand:#f59e0b;--shadow:0 8px 28px rgba(15,23,42,.07)}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{border:0;border-radius:10px;padding:10px 13px;font-weight:750;cursor:pointer;background:#eef0f4;color:var(--text)}.primary{background:var(--dark);color:#fff}.danger{background:#fee2e2;color:#991b1b}.app{min-height:100vh}.sidebar{width:245px;background:#111827;color:#fff;position:fixed;inset:0 auto 0 0;padding:18px 12px;z-index:30;display:flex;flex-direction:column}.logo{display:flex;align-items:center;gap:10px;padding:4px 9px 22px}.logoIcon{width:40px;height:40px;border-radius:12px;background:var(--brand);display:grid;place-items:center;font-size:22px}.logoTitle{font-size:17px;font-weight:850}.logoSub{font-size:10px;color:#9ca3af}.sideLabel{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#6b7280;padding:8px 11px}.sideNav{display:flex;flex-direction:column;gap:4px}.sideNav button{background:transparent;color:#cbd5e1;text-align:left;padding:10px 11px}.sideNav button:hover,.sideNav button.active{background:#263044;color:#fff}.sideNav button.active{box-shadow:inset 3px 0 var(--brand)}.sideBottom{margin-top:auto;padding:12px 9px;border-top:1px solid #263044}.cloudMini{font-size:11px;color:#9ca3af;margin-bottom:9px}.main{margin-left:245px;min-height:100vh}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}.welcome h1{font-size:20px;margin:0}.welcome p{font-size:12px;color:var(--muted);margin:4px 0 0}.topActions{display:flex;gap:8px;align-items:center}.cloud{font-size:11px;padding:6px 9px;border-radius:999px;background:#fee2e2;color:#991b1b}.cloud.ok{background:#dcfce7;color:#166534}.content{padding:24px;max-width:1500px;margin:auto}.page{display:none}.page.active{display:block}.pageTitle{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.pageTitle h2{margin:0;font-size:24px}.pageTitle p{margin:5px 0 0;color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.panel{margin-top:14px}.muted{font-size:12px;color:var(--muted)}.num{font-size:25px;font-weight:850;margin-top:5px}.form{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;font-weight:750}input,select,textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:9px;background:#fff;font-size:14px}.wide{grid-column:1/-1}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:200px}.table{overflow:auto;margin-top:10px}table{border-collapse:collapse;width:100%;min-width:850px}th,td{padding:11px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}th{background:#f9fafb;color:#4b5563;font-size:11px}.link{color:#2563eb;text-decoration:none;font-weight:700}.status{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:11px}.toast{position:fixed;right:18px;bottom:18px;background:#111827;color:#fff;padding:12px 15px;border-radius:10px;display:none;z-index:50;max-width:380px}.empty{padding:30px;text-align:center;color:#6b7280}.quickGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.quickGrid button{background:#f9fafb;border:1px solid var(--border);text-align:left}.quickGrid b{display:block;font-size:12px}.quickGrid span{font-size:11px;color:var(--muted)}.mobileMenu{display:none}@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.quickGrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.sidebar{transform:translateX(-100%);transition:.2s}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mobileMenu{display:inline-flex}.topbar{padding:0 16px}.content{padding:16px}.form{grid-template-columns:1fr 1fr}}@media(max-width:520px){.form{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.pageTitle{align-items:flex-start;flex-direction:column}.topbar{height:66px}.welcome h1{font-size:17px}.welcome p{display:none}.topActions .cloud{display:none}.quickGrid{grid-template-columns:1fr 1fr}}
 .authGate{position:fixed;inset:0;background:linear-gradient(135deg,#111827 0%,#1f2937 55%,#f59e0b 140%);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}.authBox{width:min(420px,100%);background:#fff;border-radius:22px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.authLogo{display:flex;align-items:center;gap:12px;margin-bottom:24px}.authLogoIcon{width:48px;height:48px;border-radius:14px;background:#f59e0b;display:grid;place-items:center;font-size:25px}.authTitle{font-size:24px;font-weight:900}.authSub{font-size:12px;color:#6b7280;margin-top:3px}.authBox h2{margin:0 0 6px;font-size:22px}.authHint{font-size:13px;color:#6b7280;margin:0 0 18px}.authField{margin:12px 0}.authField label{display:block;font-size:12px;font-weight:750;margin-bottom:6px}.authField input{width:100%;padding:12px 13px;border:1px solid #d1d5db;border-radius:11px;outline:none}.authField input:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.15)}.authBtn{width:100%;margin-top:8px;padding:12px;background:#111827;color:#fff;border-radius:11px;font-weight:800}.authError{display:none;background:#fee2e2;color:#991b1b;padding:10px 12px;border-radius:10px;font-size:12px;margin:12px 0}.authLoading{display:none;text-align:center;font-size:12px;color:#6b7280;margin-top:10px}.logoutBtn{font-size:11px!important;padding:7px 10px!important}.roleBadge{font-size:11px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:800}.userName{font-size:12px;color:#4b5563;font-weight:700}
 </style>
 </head>
-<body><div class="authGate" id="authGate"><div class="authBox"><div class="authLogo"><div class="authLogoIcon">💡</div><div><div class="authTitle">Light Mahal</div><div class="authSub">Secure CRM • Admin Login</div></div></div><h2>Sign in</h2><p class="authHint">Use your Light Mahal CRM account to continue.</p><div class="authError" id="authError"></div><form id="authForm"><div class="authField"><label>Login ID or Email</label><input id="authEmail" type="text" autocomplete="username" placeholder="e.g. manager or your email" required></div><div class="authField"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div><button class="authBtn" id="authBtn">Sign in</button><div class="authLoading" id="authLoading">Signing in…</div></form></div></div><div class="app"><aside class="sidebar" id="sidebar"><div class="logo"><div class="logoIcon">💡</div><div><div class="logoTitle">Light Mahal</div><div class="logoSub">CRM • CLOUD BUSINESS APP</div></div></div><div class="sideLabel">Workspace</div><nav class="sideNav"><button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="customers">👥 &nbsp; Customers</button><button data-page="leads">🎯 &nbsp; Leads & Enquiries</button><button data-page="electricians">⚡ &nbsp; Electricians</button><button data-page="architects">🏛️ &nbsp; Architects</button><button data-page="projects">🏗️ &nbsp; Projects / Sites</button><button data-page="products">📦 &nbsp; Products & Stock</button><button data-page="sales">💰 &nbsp; Sales</button><button data-page="payments">💳 &nbsp; Payments</button><button data-page="tasks">📅 &nbsp; Follow-ups</button><button data-page="team">👤 &nbsp; Team & Roles</button></nav><div class="sideBottom"><div class="cloudMini" id="sideCloud">☁ Checking cloud…</div><button id="sideTeamQuick" onclick="go('team')" style="width:100%;margin-bottom:8px;display:none">👤 Team &amp; Roles</button><button onclick="showSettings()" style="width:100%">⚙ Settings</button></div></aside><div class="main"><header class="topbar"><div class="welcome"><div style="display:flex;align-items:center;gap:9px"><button class="mobileMenu" onclick="toggleSidebar()">☰</button><h1 id="topTitle">Dashboard</h1></div><p>Manage your lighting business from one place.</p></div><div class="topActions"><span id="cloudState" class="cloud">Local mode</span><span id="userName" class="userName"></span><span id="roleBadge" class="roleBadge">Role: —</span><button onclick="showSettings()">⚙</button><button class="logoutBtn" onclick="logout()">Logout</button></div></header><main class="content"><section id="dashboard" class="page active">
+<body><div class="authGate" id="authGate"><div class="authBox"><div class="authLogo"><div class="authLogoIcon">💡</div><div><div class="authTitle">Light Mahal</div><div class="authSub">Secure CRM • Admin Login</div></div></div><h2>Sign in</h2><p class="authHint">Use your Light Mahal CRM account to continue.</p><div class="authError" id="authError"></div><form id="authForm"><div class="authField"><label>Username or Email</label><input id="authEmail" type="text" autocomplete="username" required></div><div class="authField"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div><button class="authBtn" id="authBtn">Sign in</button><div class="authLoading" id="authLoading">Signing in…</div></form></div></div><div class="app"><aside class="sidebar" id="sidebar"><div class="logo"><div class="logoIcon">💡</div><div><div class="logoTitle">Light Mahal</div><div class="logoSub">CRM • CLOUD BUSINESS APP</div></div></div><div class="sideLabel">Workspace</div><nav class="sideNav"><button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="customers">👥 &nbsp; Customers</button><button data-page="leads">🎯 &nbsp; Leads & Enquiries</button><button data-page="electricians">⚡ &nbsp; Electricians</button><button data-page="architects">🏛️ &nbsp; Architects</button><button data-page="projects">🏗️ &nbsp; Projects / Sites</button><button data-page="products">📦 &nbsp; Products & Stock</button><button data-page="sales">💰 &nbsp; Sales</button><button data-page="payments">💳 &nbsp; Payments</button><button data-page="tasks">📅 &nbsp; Follow-ups</button><button data-page="team">👤 &nbsp; Team & Roles</button></nav><div class="sideBottom"><div class="cloudMini" id="sideCloud">☁ Checking cloud…</div><button onclick="showSettings()" style="width:100%">⚙ Settings</button></div></aside><div class="main"><header class="topbar"><div class="welcome"><div style="display:flex;align-items:center;gap:9px"><button class="mobileMenu" onclick="toggleSidebar()">☰</button><h1 id="topTitle">Dashboard</h1></div><p>Manage your lighting business from one place.</p></div><div class="topActions"><span id="cloudState" class="cloud">Local mode</span><span id="userName" class="userName"></span><span id="roleBadge" class="roleBadge">Role: —</span><button onclick="showSettings()">⚙</button><button class="logoutBtn" onclick="logout()">Logout</button></div></header><main class="content"><section id="dashboard" class="page active">
 <div class="cards" id="stats"></div>
 <div class="panel"><b>Quick actions</b><div class="toolbar" style="margin-top:10px">
 <button class="primary" onclick="go('customers')">+ Customer</button><button onclick="go('leads')">+ Lead</button>
@@ -92,21 +92,21 @@
 <section id="team" class="page">
 <div class="pageTitle"><div><h2>Team & Roles</h2><p>Manage Light Mahal CRM access for your team.</p></div><button class="primary" onclick="loadTeam()">↻ Refresh</button></div>
 <div class="panel">
+<b>Create Team Login</b>
+<p class="muted">Create a username and password directly from the CRM. No real email address is needed.</p>
+<form id="teamCreateForm" class="form" style="margin-top:10px">
+<div class="field"><label>Full Name</label><input name="full_name" required></div>
+<div class="field"><label>Username</label><input name="username" placeholder="manager / staff1" required pattern="[A-Za-z0-9._-]+"></div>
+<div class="field"><label>Password</label><input name="password" type="password" minlength="6" required></div>
+<div class="field"><label>Role</label><select name="role"><option value="staff">Staff</option><option value="manager">Manager</option><option value="admin">Admin</option></select></div>
+<div><button class="primary" style="margin-top:22px">Create Account</button></div>
+</form>
+<div id="teamCreateMsg" class="muted" style="margin-top:12px"></div>
+</div>
+<div class="panel">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><b>Team members</b><p class="muted" style="margin:6px 0 0">Roles are stored in the CRM database. Passwords are never shown here.</p></div></div>
 <div id="teamMsg" class="muted" style="margin-top:12px"></div>
 <div class="table" id="teamTable" style="margin-top:14px"></div>
-</div>
-<div class="panel">
-<b>Create new CRM login</b>
-<p class="muted">Admin only. Give each team member a simple Login ID and password. The account is created securely in Supabase Authentication.</p>
-<form id="teamCreateForm" class="form" style="margin-top:12px">
-<div class="field"><label>Full Name</label><input name="full_name" required></div>
-<div class="field"><label>Login ID</label><input name="username" pattern="[A-Za-z0-9._-]{3,30}" placeholder="e.g. manager" required></div>
-<div class="field"><label>Temporary Password</label><input name="password" type="password" minlength="6" required></div>
-<div class="field"><label>CRM Role</label><select name="role"><option value="staff">Staff</option><option value="manager">Manager</option><option value="admin">Admin</option></select></div>
-<div><button class="primary" style="margin-top:22px" type="submit">Create Team Member</button></div>
-</form>
-<div id="teamCreateMsg" class="muted" style="margin-top:10px"></div>
 </div>
 </section>
 
@@ -156,8 +156,6 @@ function applyRolePermissions(){
   });
   const settingsButtons=document.querySelectorAll('[onclick="showSettings()"]');
   settingsButtons.forEach(b=>b.style.display=currentRole==='admin'?'':'none');
-  const teamQuick=$('sideTeamQuick');
-  if(teamQuick) teamQuick.style.display=currentRole==='admin'?'block':'none';
   const quickMap={customers:['admin','manager','staff'],leads:['admin','manager','staff'],projects:['admin','manager'],products:['admin','manager'],sales:['admin','manager']};
   document.querySelectorAll('#dashboard .toolbar button[onclick^="go("]').forEach(b=>{
     const m=b.getAttribute('onclick').match(/go\('([^']+)'\)/); if(!m)return;
@@ -180,6 +178,27 @@ async function loadCurrentProfile(session){
   applyRolePermissions();
 }
 
+async function createTeamUser(e){
+ e.preventDefault();
+ if(currentRole!=='admin'){toast('Only Admin can create team accounts');return}
+ if(!sb){toast('Cloud is not connected');return}
+ const f=e.target; const full_name=f.full_name.value.trim(); const username=f.username.value.trim().toLowerCase(); const password=f.password.value; const role=f.role.value;
+ const msg=$('teamCreateMsg'); msg.textContent='Creating account…';
+ if(!/^[a-z0-9._-]+$/.test(username)){msg.textContent='Username can use only letters, numbers, dot, underscore or hyphen.';return}
+ try{
+   const {data:{session}}=await sb.auth.getSession();
+   if(!session) throw new Error('Admin session expired. Please log in again.');
+   const syntheticEmail=username+'@lightmahal.local';
+   const {data,error}=await sb.functions.invoke('create-team-user',{body:{full_name,email:syntheticEmail,password,role}});
+   if(error) throw error;
+   if(data?.error) throw new Error(data.error);
+   msg.textContent='Account created: '+username+' ('+role+').';
+   f.reset();
+   await loadTeam();
+   toast('Team account created');
+ }catch(err){msg.textContent='Account creation failed: '+(err.message||err);}
+}
+
 async function loadTeam(){
  if(currentRole!=='admin'){toast('Only Admin can manage team roles');return}
  if(!sb){toast('Cloud is not connected');return}
@@ -198,40 +217,6 @@ async function loadTeam(){
    $('teamMsg').textContent='Role changes apply on the next login/session refresh.';
  }catch(e){box.innerHTML='';$('teamMsg').textContent='Unable to load team: '+(e.message||e);}
 }
-async function createTeamUser(form){
- if(currentRole!=='admin'){toast('Only Admin can create team accounts');return}
- if(!sb||!currentUser){toast('Cloud is not connected');return}
- const data=Object.fromEntries(new FormData(form));
- const username=String(data.username||'').trim().toLowerCase();
- if(!/^[a-z0-9._-]{3,30}$/.test(username)){ $('teamCreateMsg').textContent='Login ID must be 3–30 characters using letters, numbers, dot, underscore or hyphen.'; return }
- const internalEmail=username+'@lightmahal.local';
- const msg=$('teamCreateMsg');
- msg.textContent='Creating account…';
- try{
-   const sessionResult=await sb.auth.getSession();
-   const accessToken=sessionResult?.data?.session?.access_token;
-   if(!accessToken) throw new Error('Your CRM session has expired. Please log in again.');
-   const response=await fetch(DEFAULT_SB_URL+'/functions/v1/create-team-user',{
-     method:'POST',
-     headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken},
-     body:JSON.stringify({full_name:data.full_name,email:internalEmail,password:data.password,role:data.role})
-   });
-   const result=await response.json().catch(()=>({}));
-   if(!response.ok) throw new Error(result.error||'Unable to create account');
-   if(result.user_id && data.role!=='staff'){
-     const {error:roleError}=await sb.from('profiles').update({role:data.role,updated_at:new Date().toISOString()}).eq('id',result.user_id);
-     if(roleError) throw roleError;
-   }
-   form.reset();
-   msg.textContent='Account created successfully. Login ID: '+username+' • The team member can sign in with this ID and the temporary password.';
-   toast('Team member created');
-   await loadTeam();
- }catch(e){
-   msg.textContent='Creation failed: '+(e.message||e);
-   toast('Account creation failed');
- }
-}
-
 async function changeTeamRole(id,role){
  if(currentRole!=='admin'||!['admin','manager','staff'].includes(role)){toast('Invalid role change');return}
  if(id===currentUser?.id){toast('You cannot change your own role here');return}
@@ -310,7 +295,6 @@ function renderTasks(){let a=db.tasks.sort((a,b)=>(a.due||'').localeCompare(b.du
 function renderDashTasks(){let a=db.tasks.filter(x=>x.status!=='Done').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).slice(0,6);$('dashTasks').innerHTML=a.length?a.map(x=>'<div style="padding:9px 0;border-bottom:1px solid #eee"><b>'+esc(x.title)+'</b> — '+esc(x.person)+' <span class="status">'+esc(x.due)+'</span></div>').join(''):'<div class="empty">No pending follow-ups</div>'}
 async function toggleTask(id){let x=db.tasks.find(y=>y.id===id);if(!x)return;x.status=x.status==='Done'?'Pending':'Done';save();await cloudInsert('tasks',x);render()}
 
-$('teamCreateForm').onsubmit=e=>{e.preventDefault();createTeamUser(e.target)}
 $('customerForm').onsubmit=e=>{e.preventDefault();add('customers',e.target)}
 $('leadForm').onsubmit=e=>{e.preventDefault();add('leads',e.target)}
 $('electricianForm').onsubmit=e=>{e.preventDefault();add('electricians',e.target)}
@@ -326,6 +310,7 @@ $('saleForm').onsubmit=async e=>{e.preventDefault();let f=e.target;let x=Object.
 $('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);db={...empty,...x};save();render();toast('Backup imported')}catch(_){toast('Invalid backup')}};r.readAsText(f)}
 function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='light-mahal-crm-backup-'+today()+'.json';a.click()}
 function clearLocal(){if(confirm('Clear all local CRM data? Export a backup first.')){db=JSON.parse(JSON.stringify(empty));save();render();toast('Local data cleared')}}
+$('teamCreateForm').onsubmit=createTeamUser;
 const DEFAULT_SB_URL='https://yvadfnkyfygnuyrwxsuh.supabase.co';
 const DEFAULT_SB_KEY='sb_publishable_NltJI9fL0eUglga9a-E0oQ_suXzxV5B';
 async function initAuth(){
@@ -335,15 +320,9 @@ async function initAuth(){
  sb=window.supabase.createClient(u,k);
  const {data:{session}}=await sb.auth.getSession();
  if(session){await enterApp(session)}else{$('authGate').style.display='flex'}
- sb.auth.onAuthStateChange(async (event,session)=>{
-  if(event==='SIGNED_IN' && session){await enterApp(session)}
-  else if(event==='SIGNED_OUT'){$('authGate').style.display='flex'}
-});
+ sb.auth.onAuthStateChange(async (_event,session)=>{if(session){await enterApp(session)}else{$('authGate').style.display='flex'}});
 }
-let enterAppInProgress=false;
 async function enterApp(session){
- if(enterAppInProgress) return;
- enterAppInProgress=true;
  try{
    await loadCurrentProfile(session);
    $('authGate').style.display='none';
@@ -356,14 +335,12 @@ async function enterApp(session){
    $('authError').textContent=e.message||'Unable to load your CRM account.';
    $('authError').style.display='block';
    if(sb) await sb.auth.signOut();
- } finally {
-   enterAppInProgress=false;
  }
 }
 $('authForm').onsubmit=async e=>{
  e.preventDefault();
- const login=$('authEmail').value.trim().toLowerCase(),password=$('authPassword').value;
- const email=login.includes('@')?login:(login+'@lightmahal.local');
+ let email=$('authEmail').value.trim().toLowerCase(),password=$('authPassword').value;
+ if(email && !email.includes('@')) email=email+'@lightmahal.local';
  $('authError').style.display='none';$('authLoading').style.display='block';$('authBtn').disabled=true;
  try{
    const {error}=await sb.auth.signInWithPassword({email,password});
