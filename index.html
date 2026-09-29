@@ -12,6 +12,21 @@
 body.staffMode .historyPanel{display:none!important}
 body.staffMode .staffHistoryNote{display:block!important}
 .staffHistoryNote{display:none;padding:14px;color:#666}
+
+@media print{
+  body.printingCustomer *{visibility:hidden!important}
+  body.printingCustomer #customerPrintArea,
+  body.printingCustomer #customerPrintArea *{visibility:visible!important}
+  body.printingCustomer #customerPrintArea{display:block!important;position:absolute;left:0;top:0;width:100%;background:#fff;padding:0;margin:0}
+  body.printingCustomer .noPrint{display:none!important}
+}
+.customerPrintArea{display:none}
+.customerPrintSheet{font-family:Arial,sans-serif;color:#111;padding:28px;max-width:760px;margin:0 auto;background:#fff}
+.customerPrintHeader{display:flex;justify-content:space-between;gap:20px;border-bottom:2px solid #111827;padding-bottom:14px;margin-bottom:18px}
+.customerPrintBrand{font-size:26px;font-weight:800}.customerPrintTag{font-size:12px;color:#666;margin-top:3px}
+.customerPrintTitle{text-align:right;font-size:18px;font-weight:800}.customerPrintMeta{text-align:right;font-size:12px;color:#666;margin-top:5px}
+.customerPrintGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin:14px 0 20px}.customerPrintBox{border:1px solid #ddd;border-radius:8px;padding:11px}.customerPrintLabel{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.04em}.customerPrintValue{font-size:14px;font-weight:600;margin-top:3px;white-space:pre-wrap}
+.customerPrintTable{width:100%;border-collapse:collapse;margin-top:10px}.customerPrintTable th,.customerPrintTable td{border:1px solid #ddd;padding:8px;text-align:left;font-size:12px}.customerPrintTable th{background:#f5f5f5}.customerPrintTotal{text-align:right;margin-top:14px;font-size:14px}.customerPrintTotal strong{font-size:18px}.customerPrintFooter{border-top:1px solid #ddd;margin-top:24px;padding-top:10px;font-size:11px;color:#666;text-align:center}
 </style>
 </head>
 <body><div class="authGate" id="authGate"><div class="authBox"><div class="authLogo"><div class="authLogoIcon">💡</div><div><div class="authTitle">Light Mahal</div><div class="authSub">Secure CRM • Admin Login</div></div></div><h2>Sign in</h2><p class="authHint">Use your Light Mahal CRM account to continue.</p><div class="authError" id="authError"></div><form id="authForm"><div class="authField"><label>Username or Email</label><input id="authEmail" type="text" autocomplete="username" required></div><div class="authField"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div><button class="authBtn" id="authBtn">Sign in</button><div class="authLoading" id="authLoading">Signing in…</div></form></div></div><div class="app"><aside class="sidebar" id="sidebar"><div class="logo"><div class="logoIcon">💡</div><div><div class="logoTitle">Light Mahal</div><div class="logoSub">CRM • CLOUD BUSINESS APP</div></div></div><div class="sideLabel">Workspace</div><nav class="sideNav"><button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="customers">👥 &nbsp; Customers</button><button data-page="leads">🎯 &nbsp; Leads & Enquiries</button><button data-page="electricians">⚡ &nbsp; Electricians</button><button data-page="architects">🏛️ &nbsp; Architects</button><button data-page="projects">🏗️ &nbsp; Projects / Sites</button><button data-page="products">📦 &nbsp; Products & Stock</button><button data-page="sales">💰 &nbsp; Sales</button><button data-page="payments">💳 &nbsp; Payments</button><button data-page="tasks">📅 &nbsp; Follow-ups</button><button data-page="team">👤 &nbsp; Team & Roles</button></nav><div class="sideBottom"><div class="cloudMini" id="sideCloud">☁ Checking cloud…</div><button onclick="showSettings()" style="width:100%">⚙ Settings</button></div></aside><div class="main"><header class="topbar"><div class="welcome"><div style="display:flex;align-items:center;gap:9px"><button class="mobileMenu" onclick="toggleSidebar()">☰</button><h1 id="topTitle">Dashboard</h1></div><p>Manage your lighting business from one place.</p></div><div class="topActions"><span id="cloudState" class="cloud">Local mode</span><span id="userName" class="userName"></span><span id="roleBadge" class="roleBadge">Role: —</span><button id="printBtn" onclick="printCurrentPage()" style="display:none">🖨️ Print</button><button onclick="showSettings()">⚙</button><button class="logoutBtn" onclick="logout()">Logout</button></div></header><main class="content"><section id="dashboard" class="page active">
@@ -289,10 +304,37 @@ function render(){
  let revenue=db.sales.reduce((s,x)=>s+(Number(x.qty)*Number(x.unit)-Number(x.discount||0)),0);
  let received=db.payments.filter(x=>x.type==='Received').reduce((s,x)=>s+x.amount,0);
  $('snapshot').innerHTML=[['Sales value',money(revenue)],['Payments received',money(received)],['Active projects',db.projects.filter(x=>x.status==='In Progress').length],['Open leads',db.leads.filter(x=>!['Won','Lost'].includes(x.status)).length]].map(x=>'<div class="card"><b>'+x[0]+'</b><div class="num">'+x[1]+'</div></div>').join('');
- people('customers','ct','cs',[['Name','name'],['Phone','phone'],['Location','location'],['Purchased','purchased'],['Interested','interested'],['Value','price'],['Date','date']]);
+ renderCustomers();
  people('electricians','et','es',[['Name','name'],['Phone','phone'],['Joining','joining'],['Specialization','specialization'],['Site','site']]);
  people('architects','at','as',[['Name','name'],['Phone','phone'],['Joining','joining'],['Firm','firm'],['Site','site']]);
  renderLeads();renderProjects();renderProducts();renderSales();renderPayments();renderTasks();select('projectCustomer','customers');select('projectElectrician','electricians');select('projectArchitect','architects');select('saleCustomer','customers');select('paymentCustomer','customers');productSelect();renderDashTasks();
+}
+function renderCustomers(){
+ let a=filt('customers','cs');
+ let h='<table><tr><th>Name</th><th>Phone</th><th>Location</th><th>Purchased</th><th>Interested</th><th>Value</th><th>Date</th><th>Action</th></tr>';
+ if(!a.length) h+='<tr><td colspan="8" class="empty">No records</td></tr>';
+ a.forEach(x=>{
+   h+='<tr><td>'+esc(x.name)+'</td><td>'+phone(x.phone)+'</td><td>'+esc(x.location)+'</td><td>'+esc(x.purchased)+'</td><td>'+esc(x.interested)+'</td><td>'+money(x.price)+'</td><td>'+esc(x.date)+'</td><td><button onclick="printCustomer(\''+x.id+'\')">🖨️ Print</button> <button class="danger" onclick="del(\'customers\',\''+x.id+'\')">Delete</button></td></tr>';
+ });
+ $('ct').innerHTML=h+'</table>';
+}
+function printCustomer(id){
+ if(!['admin','manager'].includes(currentRole)){toast('Only Admin and Manager can print customer details');return}
+ const c=db.customers.find(x=>x.id===id); if(!c){toast('Customer not found');return}
+ const sales=db.sales.filter(x=>x.customer===id);
+ const payments=db.payments.filter(x=>x.customer===id);
+ const salesTotal=sales.reduce((sum,x)=>sum+(Number(x.qty||0)*Number(x.unit||0)-Number(x.discount||0)),0);
+ const customerValue=Number(c.price||0);
+ const total=sales.length?salesTotal:customerValue;
+ const received=payments.filter(x=>x.type==='Received').reduce((sum,x)=>sum+Number(x.amount||0),0);
+ const outstanding=total-received;
+ const rows=sales.length?sales.map(x=>'<tr><td>'+esc(x.date)+'</td><td>'+esc(pname('products',x.product))+'</td><td>'+esc(x.qty)+'</td><td>'+money(x.unit)+'</td><td>'+money(x.discount)+'</td><td>'+money(Number(x.qty||0)*Number(x.unit||0)-Number(x.discount||0))+'</td></tr>').join(''):'<tr><td colspan="6">No individual sales entries recorded.</td></tr>';
+ const payRows=payments.length?payments.map(x=>'<tr><td>'+esc(x.date)+'</td><td>'+esc(x.type)+'</td><td>'+esc(x.mode)+'</td><td>'+money(x.amount)+'</td><td>'+esc(x.note)+'</td></tr>').join(''):'<tr><td colspan="5">No payment entries recorded.</td></tr>';
+ $('customerPrintArea').innerHTML='<div class="customerPrintSheet"><div class="customerPrintHeader"><div><div class="customerPrintBrand">💡 Light Mahal</div><div class="customerPrintTag">Lighting your world</div></div><div><div class="customerPrintTitle">Customer Bill / Statement</div><div class="customerPrintMeta">Printed: '+esc(today())+'</div></div></div><div class="customerPrintGrid"><div class="customerPrintBox"><div class="customerPrintLabel">Customer Name</div><div class="customerPrintValue">'+esc(c.name)+'</div></div><div class="customerPrintBox"><div class="customerPrintLabel">Phone</div><div class="customerPrintValue">'+esc(c.phone||'—')+'</div></div><div class="customerPrintBox"><div class="customerPrintLabel">Location</div><div class="customerPrintValue">'+esc(c.location||'—')+'</div></div><div class="customerPrintBox"><div class="customerPrintLabel">Purchase / Requirement</div><div class="customerPrintValue">'+esc(c.purchased||'—')+'</div></div><div class="customerPrintBox"><div class="customerPrintLabel">Interested In</div><div class="customerPrintValue">'+esc(c.interested||'—')+'</div></div><div class="customerPrintBox"><div class="customerPrintLabel">Customer Notes</div><div class="customerPrintValue">'+esc(c.notes||'—')+'</div></div></div><h3>Sales Details</h3><table class="customerPrintTable"><tr><th>Date</th><th>Product</th><th>Qty</th><th>Unit Price</th><th>Discount</th><th>Total</th></tr>'+rows+'</table><h3 style="margin-top:22px">Payment Details</h3><table class="customerPrintTable"><tr><th>Date</th><th>Type</th><th>Mode</th><th>Amount</th><th>Note</th></tr>'+payRows+'</table><div class="customerPrintTotal">Total: <strong>'+money(total)+'</strong><br>Received: <strong>'+money(received)+'</strong><br>Outstanding: <strong>'+money(outstanding)+'</strong></div><div class="customerPrintFooter">Thank you for choosing Light Mahal. This document is a CRM customer statement generated from recorded sales and payments.</div></div>';
+ document.body.classList.add('printingCustomer');
+ const cleanup=()=>{document.body.classList.remove('printingCustomer');$('customerPrintArea').innerHTML='';window.removeEventListener('afterprint',cleanup)};
+ window.addEventListener('afterprint',cleanup);
+ setTimeout(()=>window.print(),50);
 }
 function renderLeads(){let a=filt('leads','ls');$('lt').innerHTML='<table><tr><th>Name</th><th>Phone</th><th>Requirement</th><th>Value</th><th>Source</th><th>Status</th><th>Follow-up</th><th></th></tr>'+a.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+phone(x.phone)+'</td><td>'+esc(x.requirement)+'</td><td>'+money(x.value)+'</td><td>'+esc(x.source)+'</td><td><span class="status">'+esc(x.status)+'</span></td><td>'+esc(x.followup)+'</td><td><button class="danger" onclick="del(\'leads\',\''+x.id+'\')">Delete</button></td></tr>').join('')+'</table>'}
 function renderProjects(){let a=filt('projects','ps');$('pt').innerHTML='<table><tr><th>Site</th><th>Customer</th><th>Electrician</th><th>Architect</th><th>Value</th><th>Status</th><th>Due</th><th></th></tr>'+a.map(x=>'<tr><td><b>'+esc(x.site)+'</b></td><td>'+esc(pname('customers',x.customer))+'</td><td>'+esc(pname('electricians',x.electrician))+'</td><td>'+esc(pname('architects',x.architect))+'</td><td>'+money(x.price)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.due)+'</td><td><button class="danger" onclick="del(\'projects\',\''+x.id+'\')">Delete</button></td></tr>').join('')+'</table>'}
@@ -370,5 +412,7 @@ $('authForm').onsubmit=async e=>{
 async function logout(){currentUser=null;currentProfile=null;currentRole=null;await sb.auth.signOut();$('authGate').style.display='flex'}
 initAuth().catch(e=>{console.error(e);$('authError').textContent='Unable to initialize login. Please refresh.';$('authError').style.display='block';$('authGate').style.display='flex'});
 </script>
+
+<div id="customerPrintArea" class="customerPrintArea"></div>
 </body>
 </html>
